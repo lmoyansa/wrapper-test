@@ -118,13 +118,14 @@ try {
 }
 
 Long exp;
+def objectPayload;
 
 try {
 	def bytesPayload = java.util.Base64.getDecoder().decode(tokenParts[1]);
 	def tokenPayload = new String(bytesPayload, &quot;UTF-8&quot;);
 	
 	def jsonSlurperPayload = new JsonSlurper();
-	def objectPayload = jsonSlurperPayload.parseText(tokenPayload);
+	objectPayload = jsonSlurperPayload.parseText(tokenPayload);
 						
 	exp = objectPayload.exp;	
 
@@ -154,7 +155,7 @@ try{
 	return "401";
 }	
 
-//if (validateTokenTime(exp) == &quot;OK&quot;) {
+if (validateTokenTime(exp) == &quot;OK&quot;) {
 	try{
 		if (alg == &quot;HS256&quot;) { 
 			//========================= Algoritmo de cifrado HS256  ==================    
@@ -246,9 +247,9 @@ try{
 		return '401';
 	}
 	return result;
-/*} else {
+} else {
 	return 401;
-}*/
+}
 
 
 
