@@ -92,17 +92,17 @@ if(secret.equals("")) {
 	}	
 }
 
-	try {
-		audienceValidation = '${AUDIENCE_VALIDATION}'
-	} catch(Exception e) {
-	}
+try {
+	audienceValidation = '${AUDIENCE_VALIDATION}'
+} catch(Exception e) {
+}
 
-	try {
-		if (audienceValidation == "true"){
-			audience = '${AUDIENCE}'
-		}
-	} catch(Exception e) {
+try {
+	if (audienceValidation == "true"){
+		audience = '${AUDIENCE}'
 	}
+} catch(Exception e) {
+}
 
 //========================= split and decode token ==================    
 				
@@ -118,14 +118,13 @@ try {
 }
 
 Long exp;
-def objectPayload;
 
 try {
 	def bytesPayload = java.util.Base64.getDecoder().decode(tokenParts[1]);
 	def tokenPayload = new String(bytesPayload, &quot;UTF-8&quot;);
 	
 	def jsonSlurperPayload = new JsonSlurper();
-	objectPayload = jsonSlurperPayload.parseText(tokenPayload);
+	def objectPayload = jsonSlurperPayload.parseText(tokenPayload);
 						
 	exp = objectPayload.exp;	
 
@@ -155,7 +154,7 @@ try{
 	return "401";
 }	
 
-//if (validateTokenTime(exp) == &quot;OK&quot;) {		
+//if (validateTokenTime(exp) == &quot;OK&quot;) {
 	try{
 		if (alg == &quot;HS256&quot;) { 
 			//========================= Algoritmo de cifrado HS256  ==================    
@@ -190,9 +189,6 @@ try{
 			Signature signature;
 			RSAPublicKey pubKeyObject;
 
-			System.out.println(payload);
-
-
 			if (audienceValidation == "true"){
 				if (payload.contains("pocisam")) {
 					aud = objectPayload.audiencias;
@@ -209,7 +205,7 @@ try{
 					System.out.println "Audiencia válida"
 				}
 			}
-			
+				
 			try {
 			
 				keyBytes = decoder.decode(stripped);
@@ -232,7 +228,8 @@ try{
 				signature.initVerify(pubKeyObject);                
 				signature.update((tokenParts[0] + '.' + tokenParts[1]).getBytes());
 
-			}		
+			}
+			
 				
 			String data = new String (tokenParts[2]);
 			byte[] dataBytes = Base64.getUrlDecoder().decode(data.getBytes("UTF-8"));
@@ -240,14 +237,12 @@ try{
 			if (signature.verify(dataBytes)) {
 				result = "200";
 			} else {
-				System.out.println("Error 401");
 				result = "401";
 			}		
 
 		}
 
 	} catch(Exception e){
-		System.out.println("Exception: "+e);
 		return '401';
 	}
 	return result;
