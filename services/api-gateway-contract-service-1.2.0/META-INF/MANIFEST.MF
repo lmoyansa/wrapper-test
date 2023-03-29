@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Implementation-Title: API Gateway Contracts Service Implementation
+Build-Date: 2021-Feb-17 15:30:00
+Implementation-Version: 1.2.0
+Built-By: ubuntu
+Specification-Vendor: MuleSoft, Inc.
+Specification-Title: API Gateway Contracts Service Implementation
+Implementation-Vendor-Id: com.mulesoft.anypoint
+Supported-Jdks: [1.8.0,12)
+Description: API Gateway Platform
+Recommended-Jdks: [1.8.0_181,9),[11,12)
+Implementation-Vendor: MuleSoft, Inc.
+License: MSA v1.0 http://www.mulesoft.com/
+Product-Url: https://www.mulesoft.com/platform/soa/mule-esb-enterprise
+Build-Revision: 27617587
+More-Info: For more information go to https://www.mulesoft.com/platfor
+ m/soa/mule-esb-enterprise
+Dev-List-Email: mule-esb@mulesoft.com
+Vendor-Url: http://www.mulesoft.com
+Support: Get commercial support: http://www.mulesoft.com/support
+Created-By: Apache Maven 3.6.2
+Build-Jdk: 1.8.0_275
+Specification-Version: 1.2
+Implementation-URL: http://www.mulesoft.com/api-gateway-contract-servi
+ ce
+
