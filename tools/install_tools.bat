@@ -12,5 +12,5 @@ set REALPATH=%~dp0
 set BASE_DIR=%REALPATH:~0,-6%
 
 IF NOT EXIST "%BASE_DIR%\tools" mkdir "%BASE_DIR%\tools"
-IF EXIST "%BASE_DIR%\bin\support-tools-installer-4.3.0-20211104-final.jar" move "%BASE_DIR%\bin\support-tools-installer-4.3.0-20211104-final.jar" "%BASE_DIR%\tools"
-java -jar "%BASE_DIR%\tools\support-tools-installer-4.3.0-20211104-final.jar" %*
+IF EXIST "%BASE_DIR%\bin\support-tools-installer-4.3.0-20230123-final.jar" move "%BASE_DIR%\bin\support-tools-installer-4.3.0-20230123-final.jar" "%BASE_DIR%\tools"
+java -jar "%BASE_DIR%\tools\support-tools-installer-4.3.0-20230123-final.jar" %*

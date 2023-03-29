@@ -64,8 +64,32 @@ then
     mkdir "$BASE_DIR/tools"
 fi
 
-if [ -f "$BASE_DIR/bin/agent-setup-2.4.22-amc-final.jar" ]
+if [ -f "$BASE_DIR/bin/agent-setup-2.4.37-amc-final.jar" ]
 then
-    mv "$BASE_DIR/bin/agent-setup-2.4.22-amc-final.jar" "$BASE_DIR/tools"
+    mv "$BASE_DIR/bin/agent-setup-2.4.37-amc-final.jar" "$BASE_DIR/tools"
 fi
-java -DagentVersion=2.4.22 -jar "$BASE_DIR/tools/agent-setup-2.4.22-amc-final.jar" $*
+
+JAVA_VERSION=$("java" -version 2>&1 | awk -F '"' '/version/ {print $2}')
+FIPS_ENABLED=0
+for i in "$@"
+do
+  if [[ "$i" == "--fips" ]]; then
+      FIPS_ENABLED=1
+      break;
+  fi
+done
+if [[ "$JAVA_VERSION" > "11" && $FIPS_ENABLED -eq 1 ]]; then
+    BC_FIPS_PATTERN="$BASE_DIR/lib/boot/bc-fips*"
+    BC_FIPS_FILES=( $BC_FIPS_PATTERN )
+
+    BCPKIX_FIPS_PATTERN="$BASE_DIR/lib/boot/bcpkix-fips*"
+    BCPKIX_FIPS_FILES=( $BCPKIX_FIPS_PATTERN )
+
+    BCTLS_FIPS_PATTERN="$BASE_DIR/lib/boot/bctls-fips*"
+    BCTLS_FIPS_FILES=( $BCTLS_FIPS_PATTERN )
+
+    BC="${BC_FIPS_FILES[0]}:${BCPKIX_FIPS_FILES[0]}:${BCTLS_FIPS_FILES[0]}:"
+    java -DagentVersion=2.4.37 -cp "$BC$BASE_DIR/tools/agent-setup-2.4.37-amc-final.jar" com.mulesoft.agent.installer.AgentInstaller $*
+else
+    java -DagentVersion=2.4.37 -jar "$BASE_DIR/tools/agent-setup-2.4.37-amc-final.jar" $*
+fi

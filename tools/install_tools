@@ -69,8 +69,8 @@ then
     mkdir "$BASE_DIR/tools"
 fi
 
-if [ -f "$BASE_DIR/bin/support-tools-installer-4.3.0-20211104-final.jar" ]
+if [ -f "$BASE_DIR/bin/support-tools-installer-4.3.0-20230123-final.jar" ]
 then
-    mv "$BASE_DIR/bin/support-tools-installer-4.3.0-20211104-final.jar" "$BASE_DIR/tools"
+    mv "$BASE_DIR/bin/support-tools-installer-4.3.0-20230123-final.jar" "$BASE_DIR/tools"
 fi
-java -DagentVersion=4.3.0-20211104 -jar "$BASE_DIR/tools/support-tools-installer-4.3.0-20211104-final.jar" $*
+java -DagentVersion=4.3.0-20230123 -jar "$BASE_DIR/tools/support-tools-installer-4.3.0-20230123-final.jar" $*
